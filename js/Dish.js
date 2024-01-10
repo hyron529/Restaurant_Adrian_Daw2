@@ -20,9 +20,9 @@ class Dish{
     */
     constructor(name){
 
-        if (name == undefined || name == "") throw new EmptyValueException("name");
+        if (name == undefined || name == "") throw new EmptyElementException("name");
 
-        if (!(new.target == Dish)) throw new InvalidConstructorException("Dish");
+        if (!(new.target == Dish)) throw new TypeErrorException("Dish");
 
         this.#name = name;
         this.#description = null;
