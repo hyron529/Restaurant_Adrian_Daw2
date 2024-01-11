@@ -29,4 +29,23 @@ class Dish{
         this.#ingredients = null;
         this.#image = null;
     }
+
+    /*
+        Creación de getters y setters de la clase Dish para poder
+        obtener los valores de cada objeto plato o asignarle un valor
+    */
+    
+    get name(){
+        return this.#name;
+    }
+
+
+
+    /*
+        Creación de toString, que nos va a servir para poder visualizar
+        posteriormente el contenido de los objetos de tipo plato
+    */
+    toString(){
+        return `Nombre del plato: ${this.#name}, Descripción: ${this.#description}, Ingredientes: ${this.#ingredients}, Imagen: ${this.#image}`;
+    }
 }
