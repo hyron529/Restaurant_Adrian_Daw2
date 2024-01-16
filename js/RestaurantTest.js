@@ -45,9 +45,108 @@ function testManagerRestaurant(){
 
     console.log("<<<<<REALIZACIÓN DE PRUEBAS EN MANAGER>>>>>");
 
+    //Declaramos la instancia del Singleton
     const managerRest = Manager.getInstance();
 
+    //Creamos objetos y los vamos añadiendo
+    let dish = managerRest.createDish("Hamburguesa");
+    dish.description = "Hecha con carne a la parrilla";
+    dish.ingredients = ["Carne", "Pan", "Lechuga", "Queso"];
+
+    let dish2 = managerRest.createDish("Arroz con leche");
+    dish2.description = "Postre casero";
+    dish2.ingredients = ["Leche", "Canela", "Arroz", "Limón"];
+
+    let dish3 = managerRest.createDish("Pizza Margarita");
+    dish2.description = "Pizza casera";
+    dish2.ingredients = ["Tomate", "Queso", "Orégano", "Harina"];
+
+    managerRest.addDish(dish, dish2, dish3);
     
+    let category = managerRest.createCategory("Postres");
+    let category2 = managerRest.createCategory("Hamburguesas");
+    let category3 = managerRest.createCategory("Pizzas");
+
+    managerRest.addCategoty(category, category2, category3);
+
+    let allergen = managerRest.createAllergen("Gluten");
+    let allergen2 = managerRest.createAllergen("Lactosa");
+
+    managerRest.addAllergen(allergen, allergen2);
+
+    let menu = managerRest.createMenu("Menú rápido");
+    let menu1 = managerRest.createMenu("Menú de la casa");
+
+    managerRest.addMenu(menu, menu1);
+
+    let restaurant = managerRest.createRestaurant("Pizza for you");
+
+    managerRest.addRestaurant(restaurant);
+
+    //Mostramos todo lo que hemos creado
+    console.log(managerRest);
+
+    //Realizamos las asignaciones
+    managerRest.assignAllergenToDish(dish, allergen);
+    managerRest.assignAllergenToDish(dish2, allergen2);
+
+    managerRest.assignCategoryToDish(category, dish2);
+    managerRest.assignCategoryToDish(category2, dish);
+
+    managerRest.assignDishToMenu(menu, dish, dish2);
+    managerRest.assignDishToMenu(menu2, dish3, dish2);
+
+    console.log(managerRest);
+
+    //Hacemos un cambio de posición
+    managerRest.changeDishesPositionsInMenu(menu, dish2, dish);
+
+    console.log(managerRest);
+
+    //Hacemos eliminaciones
+    managerRest.removeCategory(category3);
+    managerRest.removeMenu(menu2);
+
+    console.log(managerRest);
+
+    //Hacemos desasignaciones
+    managerRest.desassignAllergenToDish(dish, allergen);
+    managerRest.dessassignDishToMenu(menu, dish, dish2);
+    managerRest.dessasignCategoryToDish(category, dish2);
+
+    console.log(managerRest);
+
+    //Iteradores. Creamos funciones y realizamos pruebas de cada uno de ellos
+
+    const orden = (a,b) => a.dish.name.localeCompare(b.dish.name);
+    const buscar = (value) => value.dish.name.endsWith("a");
+
+    let categoryIter = managerRest.getDishesInCategory(category2, orden);
+    for (let dishIt of categoryIter) {
+        console.log(dishIt.dish.toString());
+    }
+
+    let dishIter = managerRest.findDishes(orden, buscar);
+    for (let dishIt of dishIter) {
+        console.log(dishIt.dish.toString());
+    }
+
+    for (const allerIt of managerRest.allergens) {
+        console.log(allerIt.allergen);
+    }
+
+    for (const cat of managerRest.categories) {
+        console.log(cat.category);
+    }
+
+    for (const menuIt of managerRest.menus) {
+        console.log(menuIt.menu);
+    }
+
+    for (const restIt of managerRest.restaurants) {
+        console.log(restIt.restaurant);
+    }
+
 }
 
 testObjectsRestaurant();
