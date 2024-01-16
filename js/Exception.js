@@ -69,4 +69,28 @@ class ErrorTypeExecption extends BaseException {
     }
 }
 
-export {ErrorTypeExecption, EmptyElementException, TypeErrorException, IncorrectValueException};
+class ObjectTrueException extends BaseException {
+    constructor(value, fileName, fileNumber) {
+        super(
+            `Error. Este objeto ya existe.`,
+            fileName,
+            fileNumber
+        );
+        this.name = "ObjectTrueException";
+        this.value = value;
+    }
+}
+
+class ObjectFalseException extends BaseException {
+    constructor(value, fileName, fileNumber) {
+        super(
+            `Error. Este objeto no existe.`,
+            fileName,
+            fileNumber
+        );
+        this.name = "ObjectFalseException";
+        this.value = value;
+    }
+}
+
+export {ErrorTypeExecption, EmptyElementException, TypeErrorException, IncorrectValueException, ObjectTrueException, ObjectFalseException};

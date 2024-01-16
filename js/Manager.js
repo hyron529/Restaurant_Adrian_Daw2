@@ -1,4 +1,4 @@
-import { EmptyElementException, ErrorTypeExecption, IncorrectValueException, TypeErrorException } from "./Exception.js";
+import {ObjectFalseException, ObjectTrueException, EmptyElementException, ErrorTypeExecption, IncorrectValueException } from "./Exception.js";
 import { Dish } from "./Dish.js";
 import { Allergen } from "./Allergen.js";
 import { Category } from "./Category.js";
@@ -17,7 +17,7 @@ import { Restaurant } from "./Restaurant.js";
     También necesitamos una clase para contener en mapas los elementos de las
     clases que heredamos
 */
-const RestaurantsManager = (function () {
+const Manager = (function () {
     let instance;
 
     class Manager {
@@ -34,7 +34,7 @@ const RestaurantsManager = (function () {
             introducido es nulo o no
         */
         constructor(name = "Restaurant Manager") {
-            if ((name === null)) throw new EmptyValueException("name");
+            if ((name === null)) throw new EmptyElementException("name");
             this.#name = name;
         }
 
@@ -98,9 +98,9 @@ const RestaurantsManager = (function () {
         */
         addCategory(...categories) {
             for (const category of categories) {
-                if (category === null) throw new InvalidValueException("category");
-                if (!(category instanceof Category)) throw new InvalidTypeExecption("category", "Category");
-                if (this.#mapCategory.has(category.name)) throw new ObjectExistsException("category");
+                if (category === null) throw new IncorrectValueException("category");
+                if (!(category instanceof Category)) throw new ErrorTypeExecption("category", "Category");
+                if (this.#mapCategory.has(category.name)) throw new ObjectTrueException("category");
                 this.#mapCategory.set(category.name, {
                     category,
                     dishes: []
@@ -118,8 +118,8 @@ const RestaurantsManager = (function () {
         */
         removeCategory(...categories) {
             for (const category of categories) {
-                if (!(category instanceof Category)) throw new InvalidTypeExecption("category", "Category");
-                if (!(this.#mapCategory.has(category.name))) throw new ObjectNoExistException("category");
+                if (!(category instanceof Category)) throw new ErrorTypeExecption("category", "Category");
+                if (!(this.#mapCategory.has(category.name))) throw new ObjectFalseException("category");
                 this.#mapCategory.delete(category.name);
                 console.log("<<<<<Categoría eliminada>>>>>");
             }
@@ -135,9 +135,9 @@ const RestaurantsManager = (function () {
         */
         addMenu(...menus) {
             for (const menu of menus) {
-                if (menu === null) throw new InvalidValueException("menu");
-                if (!(menu instanceof Menu)) throw new InvalidTypeExecption("menu", "Menu");
-                if (this.#mapMenu.has(menu.name)) throw new ObjectExistsException("menu");
+                if (menu === null) throw new IncorrectValueException("menu");
+                if (!(menu instanceof Menu)) throw new ErrorTypeExecption("menu", "Menu");
+                if (this.#mapMenu.has(menu.name)) throw new ObjectTrueException("menu");
                 this.#mapMenu.set(menu.name, {
                     menu,
                     dishes: []
@@ -155,8 +155,8 @@ const RestaurantsManager = (function () {
         */
         removeMenu(...menus) {
             for (const menu of menus) {
-                if (!(menu instanceof Menu)) throw new InvalidTypeExecption("menu", "Menu");
-                if (!(this.#mapMenu.has(menu.name))) throw new ObjectNoExistException("menu");
+                if (!(menu instanceof Menu)) throw new ErrorTypeExecption("menu", "Menu");
+                if (!(this.#mapMenu.has(menu.name))) throw new ObjectFalseException("menu");
                 this.#mapMenu.delete(menu.name);
                 console.log("<<<<<Menú eliminado>>>>>");
             }
@@ -172,9 +172,9 @@ const RestaurantsManager = (function () {
         */
         addAllergen(...allergens) {
             for (const allergen of allergens) {
-                if (allergen === null) throw new InvalidValueException("allergen");
-                if (!(allergen instanceof Allergen)) throw new InvalidTypeExecption("allergen", "Allergen");
-                if (this.#mapAllergen.has(allergen.name)) throw new ObjectExistsException("allergen");
+                if (allergen === null) throw new IncorrectValueException("allergen");
+                if (!(allergen instanceof Allergen)) throw new ErrorTypeExecption("allergen", "Allergen");
+                if (this.#mapAllergen.has(allergen.name)) throw new ObjectTrueException("allergen");
                 this.#mapAllergen.set(allergen.name, {
                     allergen,
                     dishes: []
@@ -193,8 +193,8 @@ const RestaurantsManager = (function () {
         removeAllergen(...allergens) {
             for (const allergen of allergens) {
 
-                if (!(allergen instanceof Allergen)) throw new InvalidTypeExecption("allergen", "Allergen");
-                if (!(this.#mapAllergen.has(allergen.name))) throw new ObjectNoExistException("allergen");
+                if (!(allergen instanceof Allergen)) throw new ErrorTypeExecption("allergen", "Allergen");
+                if (!(this.#mapAllergen.has(allergen.name))) throw new ObjectFalseException("allergen");
                 this.#mapAllergen.delete(allergen.name);
                 console.log("Allergen remove correctly");
             }
@@ -210,9 +210,9 @@ const RestaurantsManager = (function () {
         */
         addDish(...dishes) {
             for (const dish of dishes) {
-                if (dish === null) throw new InvalidValueException("dish");
-                if (!(dish instanceof Dish)) throw new InvalidTypeExecption("dish", "Dish");
-                if (this.#mapDish.has(dish.name)) throw new ObjectExistsException("dish");
+                if (dish === null) throw new IncorrectValueException("dish");
+                if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
+                if (this.#mapDish.has(dish.name)) throw new ObjectTrueException("dish");
                 this.#mapDish.set(dish.name, { dish });
                 console.log("Dish add correctly");
             }
@@ -229,8 +229,8 @@ const RestaurantsManager = (function () {
         */
         removeDish(...dishes) {
             for (const dish of dishes) {
-                if (!(dish instanceof Dish)) throw new InvalidTypeExecption("dish", "Dish");
-                if (!(this.#mapDish.has(dish.name))) throw new ObjectNoExistException("dish");
+                if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
+                if (!(this.#mapDish.has(dish.name))) throw new ObjectFalseException("dish");
                 this.#mapDish.delete(dish.name);
 
                 //Allergen
@@ -277,9 +277,9 @@ const RestaurantsManager = (function () {
         */
         addRestaurant(...restaurants) {
             for (const restaurant of restaurants) {
-                if (restaurant === null) throw new InvalidValueException("restaurant");
-                if (!(restaurant instanceof Restaurant)) throw new InvalidTypeExecption("restaurant", "Restaurant");
-                if (this.#mapRestaurant.has(restaurant.name)) throw new ObjectExistsException("restaurant");
+                if (restaurant === null) throw new IncorrectValueException("restaurant");
+                if (!(restaurant instanceof Restaurant)) throw new ErrorTypeExecption("restaurant", "Restaurant");
+                if (this.#mapRestaurant.has(restaurant.name)) throw new ObjectTrueException("restaurant");
                 this.#mapRestaurant.set(restaurant.name, {
                     restaurant
                 })
@@ -296,8 +296,8 @@ const RestaurantsManager = (function () {
         */
         removeRestaurant(...restaurants) {
             for (const restaurant of restaurants) {
-                if (!(restaurant instanceof Restaurant)) throw new InvalidTypeExecption("restaurant", "Restaurant");
-                if (!(this.#mapRestaurant.has(restaurant.name))) throw new ObjectNoExistException("restaurant");
+                if (!(restaurant instanceof Restaurant)) throw new ErrorTypeExecption("restaurant", "Restaurant");
+                if (!(this.#mapRestaurant.has(restaurant.name))) throw new ObjectFalseException("restaurant");
                 this.#mapRestaurant.delete(restaurant.name);
                 console.log("<<<<<restaurante eliminado>>>>>");
             }
@@ -311,8 +311,8 @@ const RestaurantsManager = (function () {
             Se añade la categoría si no existe
         */
         assignCategoryToDish(category, ...dishes) {
-            if (category === null) throw new InvalidValueException("category");
-            if (!(category instanceof Category)) throw new InvalidTypeExecption("category", "Category");
+            if (category === null) throw new IncorrectValueException("category");
+            if (!(category instanceof Category)) throw new ErrorTypeExecption("category", "Category");
             if (!(this.#mapCategory.has(category.name))) {
                 this.addCategory(category);
             }
@@ -324,8 +324,8 @@ const RestaurantsManager = (function () {
                 Devolvemos this para poder encadenar
             */
             for (const dish of dishes) {
-                if (dish === null) throw new InvalidValueException("dish");
-                if (!(dish instanceof Dish)) throw new InvalidTypeExecption("dish", "Dish");
+                if (dish === null) throw new IncorrectValueException("dish");
+                if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
                 if (!(this.#mapDish.has(dish.name))) {
                     this.addDish(dish);
                 }
@@ -335,7 +335,7 @@ const RestaurantsManager = (function () {
                     this.#mapCategory.get(category.name).dishes.push(this.#mapDish.get(dish.name));
                     console.log("El plato " + dish.name + " ha sido añadido a " + category.name);
                 } else {
-                    throw new ObjectExistsException("dish");
+                    throw new ObjectTrueException("dish");
                 }
             }
             return this;
@@ -347,8 +347,8 @@ const RestaurantsManager = (function () {
             Procedemos a ver si existe dicha categoría
         */
         deassignCategoryToDish(category, ...dishes) {
-            if (category === null) throw new InvalidValueException("category");
-            if (!(category instanceof Category)) throw new InvalidTypeExecption("category", "Category");
+            if (category === null) throw new IncorrectValueException("category");
+            if (!(category instanceof Category)) throw new ErrorTypeExecption("category", "Category");
 
             if (this.#mapCategory.has(category.name)) {
                 /*
@@ -358,18 +358,18 @@ const RestaurantsManager = (function () {
                     Retornamos this para poder encadenar
                 */
                 for (const dish of dishes) {
-                    if (!(dish instanceof Dish)) throw new InvalidTypeExecption("dish", "Dish");
+                    if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
                     let pos = this.#mapCategory.get(category.name).dishes.findIndex((elem) => elem.dish.name === dish.name);
 
                     if (pos !== -1) {
                         this.#mapCategory.get(category.name).dishes.splice(pos, 1);
                         console.log("El plato " + dish.name + " ha sido desasignado de " + category.name)
                     } else {
-                        throw new ObjectNoExistException("dish");
+                        throw new ObjectFalseException("dish");
                     }
                 }
             } else {
-                throw new ObjectNoExistException("category");
+                throw new ObjectFalseException("category");
             }
             return this;
         }
@@ -380,8 +380,8 @@ const RestaurantsManager = (function () {
             Se añade el alérgeno si no existe
         */
         assignAllergenToDish(allergen, ...dishes) {
-            if (allergen === null) throw new InvalidValueException("allergen");
-            if (!(allergen instanceof Allergen)) throw new InvalidTypeExecption("allergen", "Allergen");
+            if (allergen === null) throw new IncorrectValueException("allergen");
+            if (!(allergen instanceof Allergen)) throw new ErrorTypeExecption("allergen", "Allergen");
             if (!(this.#mapAllergen.has(allergen.name))) {
                 this.addAllergen(allergen);
             }
@@ -393,8 +393,8 @@ const RestaurantsManager = (function () {
                 Devolvemos this para poder encadenar
             */
             for (const dish of dishes) {
-                if (dish === null) throw new InvalidValueException("dish");
-                if (!(dish instanceof Dish)) throw new InvalidTypeExecption("dish", "Dish");
+                if (dish === null) throw new IncorrectValueException("dish");
+                if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
                 if (!(this.#mapDish.has(dish.name))) {
                     this.addDish(dish);
                 }
@@ -404,7 +404,7 @@ const RestaurantsManager = (function () {
                     this.#mapAllergen.get(allergen.name).dishes.push(this.#mapDish.get(dish.name));
                     console.log("Al plato" + dish.name + " se le ha añadido el alérgeno " + allergen.name);
                 } else {
-                    throw new ObjectExistsException("dish");
+                    throw new ObjectTrueException("dish");
                 }
             }
             return this;
@@ -416,8 +416,8 @@ const RestaurantsManager = (function () {
             Procedemos a ver si existe dicho alérgeno
         */
         deassignAllergenToDish(allergen, ...dishes) {
-            if (allergen === null) throw new InvalidValueException("allergen");
-            if (!(allergen instanceof Allergen)) throw new InvalidTypeExecption("allergen", "Allergen");
+            if (allergen === null) throw new IncorrectValueException("allergen");
+            if (!(allergen instanceof Allergen)) throw new ErrorTypeExecption("allergen", "Allergen");
 
             if (this.#mapAllergen.has(allergen.name)) {
                 /*
@@ -427,7 +427,7 @@ const RestaurantsManager = (function () {
                     Retornamos this para poder encadenar
                 */
                 for (const dish of dishes) {
-                    if (!(dish instanceof Dish)) throw new InvalidTypeExecption("dish", "Dish");
+                    if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
                     let pos = this.#mapAllergen.get(allergen.name).dishes
                         .findIndex((element) => element.dish.name === dish.name);
                     console.log(pos);
@@ -436,11 +436,11 @@ const RestaurantsManager = (function () {
                         this.#mapAllergen.get(allergen.name).dishes.splice(pos, 1);
                         console.log("El plato " + dish.name + " ya no tiene el alérgeno " + allergen.name)
                     } else {
-                        throw new ObjectNoExistException("dish");
+                        throw new ObjectFalseException("dish");
                     }
                 }
             } else {
-                throw new ObjectNoExistException("allergen");
+                throw new ObjectFalseException("allergen");
             }
             return this;
         }
@@ -451,8 +451,8 @@ const RestaurantsManager = (function () {
             Se añade el menú si no existe
         */
         assignDishToMenu(menu, ...dishes) {
-            if (menu === null) throw new InvalidValueException("menu");
-            if (!(menu instanceof Menu)) throw new InvalidTypeExecption("menu", "Menu");
+            if (menu === null) throw new IncorrectValueException("menu");
+            if (!(menu instanceof Menu)) throw new ErrorTypeExecption("menu", "Menu");
             if (!(this.#mapMenu.has(menu.name))) {
                 this.addMenu(menu);
             }
@@ -464,8 +464,8 @@ const RestaurantsManager = (function () {
                 Devolvemos this para poder encadenar
             */
             for (const dish of dishes) {
-                if (!(dish instanceof Dish)) throw new InvalidTypeExecption("dish", "Dish");
-                if (!(dish instanceof Dish)) throw new InvalidTypeExecption("dish", "Dish");
+                if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
+                if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
                 if (!(this.#mapDish.has(dish.name))) {
                     this.addDish(dish);
                 }
@@ -476,7 +476,7 @@ const RestaurantsManager = (function () {
                     this.#mapMenu.get(menu.name).dishes.push(this.#mapDish.get(dish.name));
                     console.log("El plato " +dish.name+ "ha sido añadido a "+menu.name);
                 } else {
-                    throw new ObjectExistsException("dish");
+                    throw new ObjectTrueException("dish");
                 }
             }
             return this;
@@ -488,8 +488,8 @@ const RestaurantsManager = (function () {
             Procedemos a ver si existe dicho menú
         */
         deassignDishToMenu(menu, ...dishes) {
-            if (menu === null) throw new InvalidValueException("menu");
-            if (!(menu instanceof Menu)) throw new InvalidTypeExecption("menu", "Menu");
+            if (menu === null) throw new IncorrectValueException("menu");
+            if (!(menu instanceof Menu)) throw new ErrorTypeExecption("menu", "Menu");
 
             if (this.#mapMenu.has(menu.name)) {
                 /*
@@ -499,19 +499,19 @@ const RestaurantsManager = (function () {
                     Retornamos this para poder encadenar
                 */
                 for (const dish of dishes) {
-                    if (!(dish instanceof Dish)) throw new InvalidTypeExecption("dish", "Dish");
+                    if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
                     let pos = this.#mapMenu.get(menu.name).dishes
                         .findIndex((element) => element.dish.name === dish.name);
                     if (pos !== -1) {
                         this.#mapMenu.get(menu.name).dishes.splice(pos, 1);
                         console.log("El plato " +dish.name + " ha sido eliminado de " + menu.name)
                     } else {
-                        throw new ObjectExistsException("dish");
+                        throw new ObjectTrueException("dish");
                     }
 
                 }
             } else {
-                throw new ObjectNoExistException("menu");
+                throw new ObjectFalseException("menu");
             }
             return this;
         }
@@ -524,9 +524,9 @@ const RestaurantsManager = (function () {
             Procedemos a comprobar que el menú exista
         */
         changeDishesPositionsInMenu(menu, dish1, dish2) {
-            if (!(menu instanceof Menu)) throw new InvalidTypeExecption("menu", "Menu");
-            if (!(dish1 instanceof Dish)) throw new InvalidTypeExecption("dish1", "Dish");
-            if (!(dish2 instanceof Dish)) throw new InvalidTypeExecption("dish2", "Dish");
+            if (!(menu instanceof Menu)) throw new ErrorTypeExecption("menu", "Menu");
+            if (!(dish1 instanceof Dish)) throw new ErrorTypeExecption("dish1", "Dish");
+            if (!(dish2 instanceof Dish)) throw new ErrorTypeExecption("dish2", "Dish");
 
             /*
                 Primero vemos si el menú está en el mapa y cogemos su posición
@@ -536,10 +536,10 @@ const RestaurantsManager = (function () {
             if (this.#mapMenu.has(menu.name)) {
                 const menuCollect = this.#getValuesMenuCollection(menu);
                 let posDish1 = menuCollect.dishes.findIndex((element) => element.dish.name === dish1.name);
-                if (posDish1 === -1) throw new ObjectNoExistException("dish1");
+                if (posDish1 === -1) throw new ObjectFalseException("dish1");
 
                 let posDish2 = menuCollect.dishes.findIndex((element) => element.dish.name === dish2.name);
-                if (posDish2 === -1) throw new ObjectNoExistException("dish2");
+                if (posDish2 === -1) throw new ObjectFalseException("dish2");
 
                 let tempPosInMenuDish1 = menuCollect.dishes[posDish1];
                 let tempPosInMenuDish2 = menuCollect.dishes[posDish2];
@@ -548,7 +548,7 @@ const RestaurantsManager = (function () {
                 menuCollect.dishes.splice(posDish2, 1, tempPosInMenuDish1);
                 console.log("El plato " + dish1.name + " y el plato " + dish2.name + " han cambiado su posición.");
             } else {
-                throw new ObjectNoExistException("menu");
+                throw new ObjectFalseException("menu");
             }
         }
 
@@ -558,8 +558,8 @@ const RestaurantsManager = (function () {
             Procedemos a comprobar si la categoría se encuentra en el mapa
         */
         *getDishesInCategory(category, order = null) {
-            if (category === null) throw new InvalidValueException("category");
-            if (!(category instanceof Category)) throw new InvalidTypeExecption("category", "Category");
+            if (category === null) throw new IncorrectValueException("category");
+            if (!(category instanceof Category)) throw new ErrorTypeExecption("category", "Category");
 
             if (this.#mapCategory.has(category.name)) {
                 /*
@@ -584,8 +584,8 @@ const RestaurantsManager = (function () {
             Procedemos a comprobar si e alérgeno se encuentra en el mapa
         */
         *getDishesWithAllergen(allergen, order = null) {
-            if (allergen === null) throw new InvalidValueException("allergen");
-            if (!(allergen instanceof Allergen)) throw new InvalidTypeExecption("allergen", "Allergen");
+            if (allergen === null) throw new IncorrectValueException("allergen");
+            if (!(allergen instanceof Allergen)) throw new ErrorTypeExecption("allergen", "Allergen");
 
                 /*
                     Almacenamos los platos en un array nuevo y 
@@ -722,12 +722,12 @@ const RestaurantsManager = (function () {
         en el patrón Singleton
     */
     function createInstance() {
-        const restaurantManager = new RestaurantsManager();
-        return restaurantManager;
+        const manager = new Manager();
+        return manager;
     }
 
     /*
-        En caso de qe la instancia no se encuentre, la creamos
+        En caso de que la instancia no se encuentre, la creamos
         Devolvemos la instancia
     */
     return {
