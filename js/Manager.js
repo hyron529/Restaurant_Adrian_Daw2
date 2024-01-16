@@ -196,7 +196,7 @@ const Manager = (function () {
                 if (!(allergen instanceof Allergen)) throw new ErrorTypeExecption("allergen", "Allergen");
                 if (!(this.#mapAllergen.has(allergen.name))) throw new ObjectFalseException("allergen");
                 this.#mapAllergen.delete(allergen.name);
-                console.log("Allergen remove correctly");
+                console.log("<<<<<Alérgeno eliminado>>>>>");
             }
             return this;
         }
@@ -214,7 +214,7 @@ const Manager = (function () {
                 if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
                 if (this.#mapDish.has(dish.name)) throw new ObjectTrueException("dish");
                 this.#mapDish.set(dish.name, { dish });
-                console.log("Dish add correctly");
+                console.log("<<<<<Plato añadido>>>>>");
             }
             return this;
         }
@@ -393,6 +393,7 @@ const Manager = (function () {
                 Devolvemos this para poder encadenar
             */
             for (const dish of dishes) {
+                console.log(typeof dish)
                 if (dish === null) throw new IncorrectValueException("dish");
                 if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
                 if (!(this.#mapDish.has(dish.name))) {
@@ -430,7 +431,6 @@ const Manager = (function () {
                     if (!(dish instanceof Dish)) throw new ErrorTypeExecption("dish", "Dish");
                     let pos = this.#mapAllergen.get(allergen.name).dishes
                         .findIndex((element) => element.dish.name === dish.name);
-                    console.log(pos);
 
                     if (pos !== -1) {
                         this.#mapAllergen.get(allergen.name).dishes.splice(pos, 1);

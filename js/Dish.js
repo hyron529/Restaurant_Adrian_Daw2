@@ -21,7 +21,7 @@ class Dish{
     */
     constructor(name){
 
-        if (name == undefined || name == "") throw new EmptyElementException("name");
+        if (name === undefined || name === "") throw new EmptyElementException("name");
 
         if (!(new.target == Dish)) throw new TypeErrorException("Dish");
 
@@ -36,16 +36,16 @@ class Dish{
         obtener los valores de cada objeto plato o asignarle un valor
     */
     
-    get Name(){
+    get name(){
         return this.#name;
     }
 
-    get Description(){
+    get description(){
         return this.#description;
     }
 
     
-    get Ingredients () {
+    get ingredients () {
         let ingredientList = this.#ingredients;
         return {
             [Symbol.iterator]: () => {

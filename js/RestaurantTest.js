@@ -17,28 +17,28 @@ function testObjectsRestaurant(){
     let dish = new Dish("Pizza barbacoa");
     dish.description = "Pizza casera barbacoa hecha en horno de piedra";
     dish.ingredients = ["Salsa barbacoa", "Carne de cerdo"];
-    console.log(dish.toString);
+    console.log(dish.toString());
     
     let allergen = new Allergen("Gluten");
     allergen.description = "Alérgeno en productos de trigo";
-    console.log(allergen.toString);
+    console.log(allergen.toString());
 
     let category = new Category("Pizzas");
     category.description = "Sección con todas las pizzas disponibles";
-    console.log(category.toString);
+    console.log(category.toString());
 
     let menu = new Menu("Menú 1");
     menu.description = "Menú que incluya una pizza.";
-    console.log(menu.toString);
+    console.log(menu.toString());
 
     let coordinate = new Coordinate(33, 99);
 
     let restaurant = new Restaurant("Pizza for you");
     restaurant.description = "Pizzería de Ciudad Real";
     restaurant.location = coordinate;
-    console.log(restaurant.toString);
+    console.log(restaurant.toString());
 
-    console.log(coordinate.toString);
+    console.log(coordinate.toString());
 }
 
 function testManagerRestaurant(){
@@ -58,8 +58,8 @@ function testManagerRestaurant(){
     dish2.ingredients = ["Leche", "Canela", "Arroz", "Limón"];
 
     let dish3 = managerRest.createDish("Pizza Margarita");
-    dish2.description = "Pizza casera";
-    dish2.ingredients = ["Tomate", "Queso", "Orégano", "Harina"];
+    dish3.description = "Pizza casera";
+    dish3.ingredients = ["Tomate", "Queso", "Orégano", "Harina"];
 
     managerRest.addDish(dish, dish2, dish3);
     
@@ -67,7 +67,7 @@ function testManagerRestaurant(){
     let category2 = managerRest.createCategory("Hamburguesas");
     let category3 = managerRest.createCategory("Pizzas");
 
-    managerRest.addCategoty(category, category2, category3);
+    managerRest.addCategory(category, category2, category3);
 
     let allergen = managerRest.createAllergen("Gluten");
     let allergen2 = managerRest.createAllergen("Lactosa");
@@ -87,14 +87,14 @@ function testManagerRestaurant(){
     console.log(managerRest);
 
     //Realizamos las asignaciones
-    managerRest.assignAllergenToDish(dish, allergen);
-    managerRest.assignAllergenToDish(dish2, allergen2);
+    managerRest.assignAllergenToDish(allergen, dish);
+    managerRest.assignAllergenToDish(allergen2, dish2);
 
     managerRest.assignCategoryToDish(category, dish2);
     managerRest.assignCategoryToDish(category2, dish);
 
     managerRest.assignDishToMenu(menu, dish, dish2);
-    managerRest.assignDishToMenu(menu2, dish3, dish2);
+    managerRest.assignDishToMenu(menu1, dish3, dish2);
 
     console.log(managerRest);
 
@@ -105,14 +105,14 @@ function testManagerRestaurant(){
 
     //Hacemos eliminaciones
     managerRest.removeCategory(category3);
-    managerRest.removeMenu(menu2);
+    managerRest.removeMenu(menu1);
 
     console.log(managerRest);
 
     //Hacemos desasignaciones
-    managerRest.desassignAllergenToDish(dish, allergen);
-    managerRest.dessassignDishToMenu(menu, dish, dish2);
-    managerRest.dessasignCategoryToDish(category, dish2);
+    managerRest.deassignAllergenToDish(allergen, dish);
+    managerRest.deassignDishToMenu(menu, dish, dish2);
+    managerRest.deassignCategoryToDish(category, dish2);
 
     console.log(managerRest);
 

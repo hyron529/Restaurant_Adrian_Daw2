@@ -21,9 +21,9 @@ class Restaurant {
     */
     constructor(name) {
 
-        if (name = "" || name == undefined) throw new EmptyElementException("name");
+        if (name === "" || name === undefined) throw new EmptyElementException("name");
 
-        if (!(new.target == Restaurant)) throw new TypeErrorException("Restaurant");
+        if (!(new.target === Restaurant)) throw new TypeErrorException("Restaurant");
 
         this.#name = name;
         this.#description = null;

@@ -59,7 +59,7 @@ class TypeErrorException extends BaseException {
 class ErrorTypeExecption extends BaseException {
     constructor(value, type, fileName, fileNumber) {
         super(
-            `Error. Debe introducir el tipo adecuado.`,
+            `Error. Debe introducir el tipo adecuado. ${value} ${type}`,
             fileName,
             fileNumber
         );

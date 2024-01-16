@@ -18,9 +18,9 @@ class Category {
     */
     constructor(name) {
 
-        if (name = "" || name == undefined) throw new EmptyElementException("name");
+        if (name === "" || name === undefined) throw new EmptyElementException("name");
 
-        if (!(new.target == Category)) throw new TypeErrorException("Category");
+        if (!(new.target === Category)) throw new TypeErrorException("Category");
 
         this.#name = name;
         this.#description = null;

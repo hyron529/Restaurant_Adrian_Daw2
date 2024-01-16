@@ -18,9 +18,9 @@ class Menu {
     */
     constructor(name) {
 
-        if (name = "" || name == undefined) throw new EmptyElementException("name");
+        if (name === "" || name === undefined) throw new EmptyElementException("name");
 
-        if (!(new.target == Menu)) throw new TypeErrorException("Menu");
+        if (!(new.target === Menu)) throw new TypeErrorException("Menu");
 
         this.#name = name;
         this.#description = null;
