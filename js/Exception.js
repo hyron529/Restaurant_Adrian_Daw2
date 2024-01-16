@@ -68,3 +68,5 @@ class ErrorTypeExecption extends BaseException {
         this.type = type;
     }
 }
+
+export {ErrorTypeExecption, EmptyElementException, TypeErrorException, IncorrectValueException};

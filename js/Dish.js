@@ -1,3 +1,4 @@
+import {EmptyElementException, TypeErrorException, ErrorTypeExecption} from "./Exception.js";
 
 /**
  * Creación de la clase Dish, que nos va a permitir almacenar
@@ -13,7 +14,7 @@ class Dish{
     #image;
 
     /*
-        Definición del constrructor de la clase Dish
+        Definición del constructor de la clase Dish
         Pasando el nombre inicialmente, vamos a comprobar si no se introduce un nombre de plato,
         o si el operador new no ha sido utilizado, por lo que lanzamos excepción
         Una vez comprobado, podemos definir nuestras variables
@@ -35,11 +36,53 @@ class Dish{
         obtener los valores de cada objeto plato o asignarle un valor
     */
     
-    get name(){
+    get Name(){
         return this.#name;
     }
 
+    get Description(){
+        return this.#description;
+    }
 
+    
+    get Ingredients () {
+        let ingredientList = this.#ingredients;
+        return {
+            [Symbol.iterator]: () => {
+                let nextIndex = 0;
+                return {
+                    next: () => ({
+                        value: ingredientList[nextIndex++],
+                        done: nextIndex > ingredientList.length
+                    })
+                };
+            }
+        };
+    }
+
+    get image() {
+        return this.#image;
+    }
+
+    set name(value) {
+        if (value == undefined || value == "") throw new EmptyElementException("name");
+        this.#name = value;
+    }
+
+    set description(value) {
+        if (value == undefined || value == "") throw new EmptyElementException("description");
+        this.#description = value;
+    }
+
+    set ingredients(value = []) {
+        if(!(Array.isArray(value))) throw new ErrorTypeExecption("ingredients", "array"); 
+        this.#ingredients = value;
+    }
+
+    set image(value) {
+        if (value == undefined || value == "") throw new EmptyElementException("image");
+        this.#image = value;
+    }
 
     /*
         Creación de toString, que nos va a servir para poder visualizar
@@ -49,3 +92,5 @@ class Dish{
         return `Nombre del plato: ${this.#name}, Descripción: ${this.#description}, Ingredientes: ${this.#ingredients}, Imagen: ${this.#image}`;
     }
 }
+
+export {Dish};
